@@ -22,6 +22,7 @@ bot = commands.Bot(command_prefix='&', intents=intents)
 #globals
 mha = ["mha", "hero academia", "academia", "my hero academia", "ultra", "dementia", "bakugo", "deku", "ochaco", "todoroki", "all-might", "bkdk", "AFO", "OFA", "kamino"]
 hello_responses = ["My daily penance", "You again", "What do you need now?", "You're staring at me again. What do you want?", "Yes?", "Sorry, darling, I haven't got time for underlings. If your boss wants to speak with me, I'm all pointy ears.", "Why in the hells are you bothering me now?"]
+random_react = ["acceptance", "investigation", "charm", "virtue", "guess", "letter", "body"]
 #event handlers
 
 @bot.event
@@ -41,8 +42,14 @@ async def on_message(message):
         return
     
     content = message.content.lower()
+
     if any(re.search(rf"\b{re.escape(keyword)}\b", content) for keyword in mha):
         await message.channel.send("Shut up, shut up, SHUT UP.")
+
+    if any(re.search(rf"\b{re.escape(keyword)}\b", content) for keyword in random_react):
+        await message.channel.send("Astarion reacted to your message")
+        await message.add_reaction("😈")
+
 
     await bot.process_commands(message)
 
@@ -50,6 +57,8 @@ async def on_message(message):
 @bot.command()
 async def hello(ctx):
     await ctx.send(f"{random.choice(hello_responses)}")
+
+
         
 #actually run the bot
 bot.run(token=token, log_handler=handler, log_level=logging.DEBUG)
