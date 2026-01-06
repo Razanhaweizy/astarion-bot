@@ -67,6 +67,19 @@ async def bomb(ctx, *, message="everyone"):
     embed.set_image(url=gif_url)
     await ctx.send(embed=embed)
 
-        
+@bot.command()
+async def menu(ctx):
+    '''Help menu showing available commands'''
+    embed = discord.Embed(
+        title="Astarion Help Menu",
+        description="A list of all available commands:",
+        color=discord.Color.pink()
+    )
+    embed.add_field(name="`&hello`", value="Say hello to Astarion :3", inline=False)
+    embed.add_field(name="`&bomb <name>`", value="Bomb a friend :P", inline=False)
+
+    await ctx.send(embed=embed)
+
+
 #actually run the bot
 bot.run(token=token, log_handler=handler, log_level=logging.DEBUG)
