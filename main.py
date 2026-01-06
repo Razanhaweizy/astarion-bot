@@ -4,6 +4,7 @@ import logging
 from dotenv import load_dotenv
 import os
 import re
+import random
 
 load_dotenv()
 token = os.getenv('DISCORD_TOKEN')
@@ -20,7 +21,7 @@ bot = commands.Bot(command_prefix='&', intents=intents)
 
 #globals
 mha = ["mha", "hero academia", "academia", "my hero academia", "ultra", "dementia", "bakugo", "deku", "ochaco", "todoroki", "all-might", "bkdk", "AFO", "OFA", "kamino"]
-
+hello_responses = ["My daily penance", "You again", "What do you need now?", "You're staring at me again. What do you want?", "Yes?", "Sorry, darling, I haven't got time for underlings. If your boss wants to speak with me, I'm all pointy ears.", "Why in the hells are you bothering me now?"]
 #event handlers
 
 @bot.event
@@ -45,6 +46,10 @@ async def on_message(message):
 
     await bot.process_commands(message)
 
+#commands
+@bot.command()
+async def hello(ctx):
+    await ctx.send(f"{random.choice(hello_responses)}")
         
 #actually run the bot
 bot.run(token=token, log_handler=handler, log_level=logging.DEBUG)
