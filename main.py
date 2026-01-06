@@ -54,10 +54,18 @@ async def on_message(message):
     await bot.process_commands(message)
 
 #commands
+#TODO add docstring
 @bot.command()
 async def hello(ctx):
     await ctx.send(f"{random.choice(hello_responses)}")
 
+#TODO add docstring
+@bot.command()
+async def bomb(ctx, *, message="everyone"):
+    gif_url = "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExZm5hYzBocmZ3czJ3b3hmN2NlZXlrb2pkOHpuNTN6aTFxZWtuNGRwYyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xT8qBt2943MLRO8zuM/giphy.gif"
+    embed = discord.Embed(title=f"{ctx.author} has bombed {message}")
+    embed.set_image(url=gif_url)
+    await ctx.send(embed=embed)
 
         
 #actually run the bot
